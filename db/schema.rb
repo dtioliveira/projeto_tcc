@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923024238) do
+ActiveRecord::Schema.define(version: 20150923233658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agencies", force: :cascade do |t|
+    t.integer  "city_id"
+    t.integer  "bank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "agencies", ["bank_id"], name: "index_agencies_on_bank_id", using: :btree
+  add_index "agencies", ["city_id"], name: "index_agencies_on_city_id", using: :btree
 
   create_table "banks", force: :cascade do |t|
     t.string   "name"
@@ -22,4 +32,23 @@ ActiveRecord::Schema.define(version: 20150923024238) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_foreign_key "agencies", "banks"
+  add_foreign_key "agencies", "cities"
+  add_foreign_key "cities", "states"
 end
