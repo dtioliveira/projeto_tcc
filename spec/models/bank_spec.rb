@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Bank do
   it 'is valid with a name' do
-    bank = Bank.new(name: 'Banco do Brasil')
+    bank = FactoryGirl.build(:bank)
     expect(bank).to be_valid
   end
 
@@ -13,9 +13,8 @@ describe Bank do
   end
 
   it 'is invalid with a duplicate name' do
-    Bank.create(name: 'Banco do Brasil')
-
-    bank = Bank.new(name: 'Banco do Brasil')
+    FactoryGirl.create(:bank)
+    bank = FactoryGirl.build(:bank)
     bank.valid?
     expect(bank.errors[:name]).to include('has already been taken')
   end

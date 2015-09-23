@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :bank do
-    name "MyString"
+    name "Banco do Brasil"
   end
 
 end
