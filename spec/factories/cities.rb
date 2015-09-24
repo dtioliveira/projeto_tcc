@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :city do
-    name "MyString"
-state nil
+    name "City 1"
+    association :state
   end
 
 end

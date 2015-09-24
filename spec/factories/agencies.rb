@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :agency do
-    city nil
-bank nil
+    association :city
+    association :bank
+    number 1762
+    digit 2
   end
-
 end
